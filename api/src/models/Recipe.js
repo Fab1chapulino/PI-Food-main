@@ -27,9 +27,11 @@ module.exports = (sequelize) => {
       allowNull: false
     },
     steps: {
-      type: DataTypes.ARRAY,
+      type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull:false
     }
+  },{
+    timestamps:false
   });
 };
  /*  ID. \*

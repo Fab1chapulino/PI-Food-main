@@ -1,32 +1,44 @@
 import {useParams} from "react-router-dom";
+import {useEffect, useState} from "react";
 import axios from "axios";
 
-async function getDetail(id){
-    try{
-      const {data} = await axios.get(`http://localhost:3001/recipes/${id}`)
-    console.log(data, "detail")
-    console.log(id, "id")
-    return data;
-    //setDetail({...data})
-    }catch(err){
-      console.log(err.message)
-    }
-  }
 
-export default function Detail(/* {title, image, summary, healthScore, steps, diets } */){
+
+export default function Detail(){
+    //hooks
     const {id} = useParams();
+    const [ detail, setDetail ] = useState({});
 
-    const {title, image, summary, healthScore} = getDetail(id)
-    console.log(title, "title")
+    useEffect(()=>{
+        ( async function getDetail(){
+      const {data} = await axios.get(`http://localhost:3001/recipes/${id}`)
+
+    data.diets= id.length < 36
+    ? data.diets.join(", ") 
+    : data.diets.map( diet => diet.name).join(", ");
+
+        setDetail({...data})
+  })()
+    },[])
+
+    //let { title, image, summary, healthScore, steps, diets } = detail;
+    
 
     return(
         <div>
-            <img src={image} alt={title}/>
-            <p>Name:{title}</p>
-            <p>Summary:{summary}</p>
-            <p>HealthScore:{healthScore}</p>
-            {/* <p>Instructions:{steps}</p>
-            <p>Diets:{diets}</p> */}
+            <img src={detail.image} alt={detail.title}/>
+            <p>Name:{detail.title}</p>
+            <p>Summary:{detail.ummary}</p>
+            <p>HealthScore:{detail.healthScore}</p>
+            <p>Instructions:</p>
+            <ol>
+            {detail.steps?detail.steps.map( (step,index) => {
+                return (<div key={index}>
+                    <li>{step}</li>
+                </div>)
+            }) : null}
+            </ol>
+           <p>Diets:{detail.diets}</p> 
         </div>
     )
 }

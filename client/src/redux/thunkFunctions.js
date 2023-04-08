@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getAllRecipes, getDetail } from './actions'
+import { getAllRecipes, searchByName } from './actions'
 
 export async function getRecipesThunk( dispatch, getState){
     try{
@@ -10,9 +10,9 @@ export async function getRecipesThunk( dispatch, getState){
         console.log(err.message)
     }
 } 
-/*  export function getDetailthunk( id ){
-    return async function( dispatch, getState ){
-        const { data } = await axios.get(`http://localhost:3001/recipes/${id}`);
-        dispatch(getDetail(data))
+export function getByNameThunk(query){
+    return async function(dispatch, getState){
+        const {data} = await axios.get(`http://localhost:3001/recipes/name?search=${query}`);
+        dispatch(searchByName(data))
     }
-} */
+}

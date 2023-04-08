@@ -1,12 +1,11 @@
-import {useParams} from "react-router-dom";
+import {useParams, NavLink, useHistory} from "react-router-dom";
 import {useEffect, useState} from "react";
 import axios from "axios";
-
-
 
 export default function Detail(){
     //hooks
     const {id} = useParams();
+    const history = useHistory();
     const [ detail, setDetail ] = useState({});
 
     useEffect(()=>{
@@ -21,14 +20,14 @@ export default function Detail(){
   })()
     },[])
 
-    //let { title, image, summary, healthScore, steps, diets } = detail;
-    
-
     return(
         <div>
+            <div>
+            <button onClick={()=> history.goBack()}>Go back</button>
+            </div>
             <img src={detail.image} alt={detail.title}/>
             <p>Name:{detail.title}</p>
-            <p>Summary:{detail.ummary}</p>
+            <p>Summary:{detail.summary}</p>
             <p>HealthScore:{detail.healthScore}</p>
             <p>Instructions:</p>
             <ol>

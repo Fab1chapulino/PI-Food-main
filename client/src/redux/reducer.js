@@ -1,5 +1,6 @@
 const initialState = {
-    allRecipes: []
+    allRecipes: [],
+    searchRecipes:[]
 };
 
 export default function rootReducer( state=initialState, {type, payload} ){
@@ -9,11 +10,11 @@ export default function rootReducer( state=initialState, {type, payload} ){
                 ...state,
                 allRecipes:payload
             }
-        /* case "GET_DETAIL":
-            return {
-                ...state,
-
-            } */
+            case "GET_BY_NAME":
+                return {
+                    ...state,
+                    searchRecipes:[...payload]
+                }
         default:
             return {
                 ...state

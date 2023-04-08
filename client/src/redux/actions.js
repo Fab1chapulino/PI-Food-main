@@ -10,3 +10,9 @@ export function getDetail( detail ){
         payload:detail
     }
 }
+export function searchByName( query ){
+    return {
+        type:"GET_BY_NAME",
+        payload: query
+    }
+}

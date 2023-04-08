@@ -8,6 +8,7 @@ import {Provider} from "react-redux";
 import store from "./redux/store";
 import {getRecipesThunk} from "./redux/thunkFunctions"
 
+
 store.dispatch(getRecipesThunk);
 
 ReactDOM.render(

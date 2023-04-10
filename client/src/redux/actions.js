@@ -16,3 +16,9 @@ export function searchByName( query ){
         payload: query
     }
 }
+export function createRecipe(form){
+    return {
+        type:"CREATE_RECIPE",
+        payload:form
+    }
+}

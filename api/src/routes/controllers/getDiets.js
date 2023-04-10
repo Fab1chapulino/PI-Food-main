@@ -14,16 +14,16 @@ const getDiets = async function (req, res){
           for(let i=0;i<results.length; i++){
             diets=diets.concat(results[i].diets)
         }  
+
           const setOfDiets = new Set(diets)
         diets=[...setOfDiets]
-        console.log(diets.length)
         diets=diets.map(diet=>{
           return {name:diet}
         })
           const bulkDiets = await Diet.bulkCreate( diets )
           res.status(200).json(bulkDiets) 
         }else{
-          res.status(200).send('All diets already fetched') 
+          res.status(200).json(alreadyCreated) 
         }
         
 

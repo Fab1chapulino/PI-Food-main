@@ -41,7 +41,10 @@ export default function Search(){
     },[search]) 
 
      useEffect(()=>{
-    searching? history.push(`/search`): history.push("/home/1")
+        if(location.pathname==="/search"){
+            !searching && history.push("/home/1")
+        }
+    
     },[searching])
 
     useEffect(()=>{

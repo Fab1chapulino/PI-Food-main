@@ -28,6 +28,7 @@ const getAllRecipes = async function (req, res){
         const allRecipes = allRecipesDB.concat(allRecipesApi);
         res.status(200).json(allRecipes);
     }catch(err){
+        console.log(err.message)
         res.status(500).send(err.message)
     }
 } 

@@ -16,10 +16,11 @@ const getDiets = async function (req, res){
         }  
 
           const setOfDiets = new Set(diets)
-        diets=[...setOfDiets]
+        diets=[...setOfDiets];
         diets=diets.map(diet=>{
           return {name:diet}
-        })
+        });
+        diets.push({name:"None"})
           const bulkDiets = await Diet.bulkCreate( diets )
           res.status(200).json(bulkDiets) 
         }else{

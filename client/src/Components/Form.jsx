@@ -3,17 +3,21 @@ import axios from "axios";
 import validate from "../validations";
 import {useDispatch, useSelector} from "react-redux";
 import {createRecipeThunk} from "../redux/thunkFunctions";
+import {useHistory} from 'react-router-dom';
 
 export default function Form(){
     //hooks
     const dispatch = useDispatch();
+    const history = useHistory();
+    const message= useSelector( state => state.message)
+    //useStates
     const [input, setInput]= useState({
         title:"",
         summary:"",
         steps:[],
         healthScore:0,
         diets:[],
-        image:"" 
+        image:""
     });
     const [errors, setErrors] = useState({
         title:"",
@@ -28,7 +32,7 @@ export default function Form(){
 
 
 //Some extra Logic
-//Handling the inputs
+/*--------------------------Handling the inputs-----------------------------*/
 
     function handleInputChange(e){
         /*---------------for diets-----------*/
@@ -58,39 +62,82 @@ export default function Form(){
             [e.target.name]: e.target.value
             })      
         }
-        setErrors(validate({
-            ...input
-        }))
-   
-        //console.log(e.target.value)
-        console.log(input, "input")  
-    }
 
+        if(e.target.name==="steps"){
+            console.log(input.steps)
+            setErrors({
+                ...errors,
+                [e.target.name]:validate({
+                    [e.target.name]: input.steps
+                })[e.target.name]
+            })
+        }else{
+             setErrors({
+            ...errors,
+            [e.target.name]:validate({
+                [e.target.name]: e.target.value
+            })[e.target.name]
+        })
+        }
+    }
+/*--------------------------HandleSubmit------------------------------*/
     function handleSubmit(e){
         e.preventDefault()
-        setErrors(validate(input))
-        submit && dispatch(createRecipeThunk(input))
+        console.log(submit, "submit")
+         if(submit){
+            dispatch(createRecipeThunk(input))
+        } 
     }
 
 
 //Doing the user to know what instructions have been added so far
       function createStep(){
-        const {steps} = input;
         step.length &&
         setInput({
             ...input,
-            steps:[...steps, step]
+            steps:[...input.steps,step]
         })
         setSteps("")
-        console.log(input)
+        setErrors({
+            ...errors,
+            steps:""
+        })
+        //console.log(input)
     }  
 
-    /*-------------useEffects--------------*/
+    function deleteStep(e){
+        const id = e.target.id;
+        console.log(typeof id, "-------> ID del step")
+        if(input.steps.length===1){
+            setInput({
+                ...input,
+                steps:[]
+            }) 
+        }else{
+            const filtered = input.steps.find( (e,i) =>i == id)
+            setInput({
+                ...input,
+                steps:[...input.steps.filter( step => step !== filtered)]
+            })
+            console.log(filtered, "-------->filtered")
+            console.log(input.steps, "blbablabab")
+        }
+    }
+  function editStep(e){
+            const {id, value}= e.target;
+            const newSteps = input.steps.toSpliced(id,1, value)
+            setInput({
+                ...input,
+                steps:[...newSteps]
+            })
+        }
+    /*------------------------------------------useEffects----------------------------------------------*/
 
     useEffect( ()=>{
         async function fetchDiets(){
         const {data} = await axios.get("http://localhost:3001/diets")
         let dietNames = data.map( diet => diet.name)
+        dietNames.pop();
         setDiets(dietNames)
     }
       fetchDiets()
@@ -103,7 +150,20 @@ export default function Form(){
             setSubmit(true)
         }
     },[errors])
-    
+
+    useEffect(()=>{
+        console.log(message, "message")
+           if(message==="CANNOT POST RECIPE"){
+                console.log(input)
+                setErrors(validate(input))
+            }else if(message==="POSTED RECIPE SUCCESFULLY"){
+                history.push("/home/1")
+                window.location.reload() 
+            }
+    },[message])
+
+
+    /*---------------------Rendering------------- */
     return (
         <div>
             <h1>Create a Recipe</h1>
@@ -125,11 +185,16 @@ export default function Form(){
 
                 <label for="steps">Instructions</label>
                 <input name="steps"  value={step} id="steps" onChange={ e => handleInputChange(e)}/>
-                <button   onClick={()=>createStep()}  >Add</button>
+                <label   onClick={()=>createStep()}  >Add</label>
                 <p>{errors.steps && errors.steps}</p>
                 <ol>
                     { input.steps && input.steps.map( (inst, i) =>{
-                        return <li key={i} >{inst}</li>
+                        return <li key={i} >
+                            <span>{inst}</span>
+                            <input id={i} onChange={(e)=> editStep(e)} value={input.steps[i]}/>               
+                            <label id={i} onClick={(e) => deleteStep(e)}>X</label>
+
+                            </li>
                     })}
                 </ol>
 

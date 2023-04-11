@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getAllRecipes, searchByName,createRecipe } from './actions'
+import { getAllRecipes, searchByName, generateError } from './actions'
 
 export async function getRecipesThunk( dispatch, getState){
     try{
@@ -18,7 +18,12 @@ export function getByNameThunk(query){
 }
 export function createRecipeThunk(form){
     return async function(dispatch, geState){
-        const {data}=axios.post("http://localhost:3001/recipes", form)
-        dispatch(createRecipe(data))
+        try{
+            const {data}= await axios.post("http://localhost:3001/recipes", form)
+            console.log(data, "data")
+            dispatch(generateError(data))
+        }catch(err){
+            dispatch(generateError("CANNOT POST RECIPE"))
+        }
     }
 }

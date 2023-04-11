@@ -22,3 +22,9 @@ export function createRecipe(form){
         payload:form
     }
 }
+export function generateError(error){
+    return {
+        type:"GENERATE_ERROR",
+        payload: error
+    }
+}

@@ -12,7 +12,8 @@ const getAllRecipes = async function (req, res){
                 id:recipe.id,
                 title:recipe.title,
                 image:recipe.image,
-                diets:recipe.diets
+                diets:recipe.diets,
+                healthScore:recipe.healthScore
             }
         })
         const allRecipesDB = await Recipe.findAll({

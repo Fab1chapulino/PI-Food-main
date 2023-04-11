@@ -1,13 +1,14 @@
 import { useSelector } from "react-redux";
 import { NavLink, useParams } from "react-router-dom";
 import Cards from "./Cards";
+import Options from "./Options.jsx";
 
 export default function Home(){
     //hooks
     const { page } = useParams();
     //Gettin nine recipes
     const allRecipes = useSelector(data=>data.allRecipes);
-    console.log(allRecipes);
+    //console.log(allRecipes);
     const nineRecipes = allRecipes.slice((page-1)*9, page*9)
     //Setting pages
     let pages = [];
@@ -17,7 +18,7 @@ export default function Home(){
     //rendering
     return (
         <div>
-
+            <Options/>
             <div>
                 {pages.map( page => {
                      return (<span key={page}>

@@ -28,3 +28,15 @@ export function generateError(error){
         payload: error
     }
 }
+export function filter(filters){
+    return {
+        type:"FILTER",
+        payload: filters
+    }
+}
+export function order(orders){
+    return {
+        type:"ORDER",
+        payload:orders
+    }
+}

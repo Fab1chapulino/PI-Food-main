@@ -16,6 +16,7 @@ const postRecipes = async function (req, res){
         } = req.body;
 
         title=title.capitalize();
+        steps=steps.filter( step => step.length !== 0)
         
          const newRecipe = await Recipe.create({
             title,

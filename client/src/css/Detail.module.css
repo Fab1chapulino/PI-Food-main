@@ -1,0 +1,35 @@
+.Data{
+    padding:1vh 1vw;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.goBack{
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-size:0.9em;
+    background-color:#03071E;
+    color:#FAA307;
+    padding:0.5vh 0.7vw;
+    border-radius:0.5em;
+    cursor:pointer;
+    margin:1vh 0.5vw;
+}
+.image{
+    float:right;
+    border-radius:2em;
+    border:solid #03071E;
+}
+.Title{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color:#DC2F02;
+    text-shadow:-0.05em 0.05em 0em #03071E;
+    text-align: left;
+    max-width:50vw;
+}
+.Summary{
+    text-align:left;
+}
+.healthScoreValue{
+    color:#F48C06;
+    font-size:3em;
+    margin:0;
+    text-shadow:0 0 0;
+}

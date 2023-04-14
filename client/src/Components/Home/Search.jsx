@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import Cards from "./Cards.jsx";
 import {useDispatch} from "react-redux";
 import {getByNameThunk} from "../../redux/thunkFunctions.js";
+import styles from "../../css/Search.module.css";
 
 export default function Search(){
     //hooks
@@ -21,8 +22,10 @@ export default function Search(){
             const value = e.target.value;
             setQuery(value);
         }
-    const onSearch=function(){
-            if(query.length){
+    const onSearch=function(e){
+        const {code, type}=e
+        console.log(code)
+            if((query.length && type==="click") || (query.length && code==="Enter")){
                 //Set the searchin mode
                 setSearching(true);
                 //Increment pages
@@ -30,7 +33,7 @@ export default function Search(){
                 setRecipes([])
                 location.pathname !== "/search" && history.push("/search")
                 dispatch(getByNameThunk(query))
-                setQuery("")
+                //setQuery("")
             } 
         }
 
@@ -54,13 +57,13 @@ export default function Search(){
     //rendering
     return (
         <div>
-            <div>
-                <input type="search" size="70" onChange={(e)=> handleInputChange(e)} value={query}/>
-                <button onClick={()=>onSearch()}>search</button>
+            <div className={styles.Search}>
+                <input type="search" size="70" onChange={(e)=> handleInputChange(e)} value={query} className={styles.input} onKeyDown={(e)=>onSearch(e)} />
+                <span onClick={(e)=>onSearch(e)} className={styles.searchButton}>search</span>
             </div>
             {
             location.pathname==="/search" && recipes.length
-            ?<div><button onClick={()=>history.go(-pages)}>Go Back</button><Cards nineRecipes={recipes} /></div>
+            ?<div><span onClick={()=>history.go(-pages)} className={styles.goBack}>Go Back</span><Cards nineRecipes={recipes} /></div>
             :null
             }
         </div>

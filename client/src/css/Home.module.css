@@ -1,0 +1,66 @@
+.Pages{
+    width: 100vw;
+    display:flex;
+    justify-content:center;
+}
+.button{
+    text-decoration:none;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    background-color:#03071E;
+    color:#FFBA08;
+    margin-left:0.1em;
+    padding:0.2em;
+    border-radius:0.2em;
+    cursor:pointer;
+}
+.button:hover{
+    text-decoration:underline;
+}
+.button:active{
+    background-color:#370617;
+}
+.Cards{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-around;
+    margin:0;
+    padding:0;
+}
+.divCard{
+    max-width:25vw;
+    margin:0;
+    padding:0;
+}
+.link{
+    text-decoration:none;
+    color:#FFBA08;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+}
+.link:visited{
+    color:#FFBA08;
+}
+.title:hover{
+    text-decoration:underline;
+}
+.Card{
+    min-height:55vh;
+    max-height:55vh;
+    margin:2vh 0;
+    background-color:#03071E;
+    padding:2vh 1vw;
+    border-radius:2em;
+    transition:transform 0.2s;
+}
+.Card:hover{
+  transform:scale(1.1,1.1)
+}
+@keyframes Card{
+    from {transform:scale(1, 1)}
+    to {transform:scale(1.1, 1.1)}
+}
+.cardImage{
+    max-width:100%;
+    min-height:50%;
+    border-radius:2em;
+    border:solid yellow;
+}

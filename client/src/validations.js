@@ -52,8 +52,14 @@ export default function validate(input){
                 ...errors,
                 steps:"Your recipe need instructions."
             }
-        }
+        }else if(!input.steps.find( step => step.length>1)){
+             errors={
+                ...errors,
+                steps:"Your recipe need instructions."
+            }
+        }   
     }
+    
  
     if(input.image !== undefined){
         if(!input.image.length){

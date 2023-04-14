@@ -24,13 +24,8 @@ function App() {
           <Landing/>
         </Route>
 
-         <Route path="/home/:page">
-         { allRecipes.length
-         ?<div>
-          
+         <Route path="/home/:page">    
          <Home/>
-          </div>
-         :<Loading/>}
         </Route>
 
         <Route path="/form">

@@ -1,0 +1,11 @@
+Negro: 03071E
+Rojo mas oscuro:370617
+Rojo menos oscuro: 6A040F
+Rojo todavia menos oscuro: 9D0208
+Rojo claro: D00000
+Rojo mas claro:DC2F02
+Naranja: E85D04
+Durazno: F48C06
+Amarillo Oscuro: FAA307
+Amarillo claro: FFBA08
+

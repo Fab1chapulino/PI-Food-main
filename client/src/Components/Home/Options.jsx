@@ -2,6 +2,7 @@ import {useState, useEffect} from "react";
 import axios from "axios";
 import { filter,order } from "../../redux/actions";
 import {useDispatch} from "react-redux";
+import styles from "../../css/Options.module.css";
 
 export default function Options(){
     //hooks
@@ -87,38 +88,56 @@ export default function Options(){
 
 
     //rendering
-    return (<div>
-        <h3>Filters</h3>
-        <div>
-            
-            <label id="diets" onClick={(e)=>showOptions(e)}>By diets</label>
-            {show.diets && diets.map( (diet, i) => {
-                return <div key={i}>
-                    <input type="checkbox" name="diets" id={diet} value={diet} onChange={(e)=> handleFilters(e)}/>
-                    <label for={diet}>{diet}</label>
-                </div>
-            })}
-        <select name="origin" onChange={(e)=>handleFilters(e)}>
-            <option value="Show All">Show All</option>
-            <option value="Created">Created</option>
-            <option value="Not Created">Not Created</option>
-        </select>
-        </div>
-        <h3>Order By</h3>
-        <div>
-            <select name="by" onChange={(e)=>handleOrder(e)}>
-                <option value="By">By</option>
-                <option value="HealthScore">HealthScore</option>
-                <option value="Alphabetically">Alphabetically</option>
-            </select>
-            <select name="mode" onChange={(e)=>handleOrder(e)}>
-                <option value="Mode">Mode</option>
-                <option value="Ascending">Ascending</option>
-                <option value="Descending">Descending</option>
-            </select>  
-        </div>
-        
-        
+    return (<div className={styles.Options}>
 
+        {/* Filters */}
+        <div>
+        <h3>Filters</h3>
+            <div >
+                <div className={styles.filtersOrders}>
+                     
+                    <label id="diets" onClick={(e)=>showOptions(e)} className={styles.label}>By diets</label>
+
+                </div>  
+                
+                <div className={styles.filtersOrders}>
+                    <select name="origin" onChange={(e)=>handleFilters(e)} className={styles.select}>
+                    <option value="Show All">Show All</option>
+                    <option value="Created">Created</option>
+                    <option value="Not Created">Not Created</option>
+                    </select>
+                </div>
+                {show.diets && diets.map( (diet, i) => {
+                        return <div key={i} >
+                            <input type="checkbox" name="diets" id={diet} value={diet} onChange={(e)=> handleFilters(e)}/>
+                            <label for={diet}>{diet}</label>
+                        </div>
+                    })}
+            
+            </div>
+        </div>
+       
+
+            {/* Orders */}
+        <div>
+        <h3>Order By</h3>
+            <div>
+                <div className={styles.filtersOrders}>
+                    <select name="by" onChange={(e)=>handleOrder(e)} className={styles.select}>
+                        <option value="By">By</option>
+                        <option value="HealthScore">HealthScore</option>
+                        <option value="Alphabetically">Alphabetically</option>
+                    </select>
+                </div>
+               <div className={styles.filtersOrders}>
+                    <select name="mode" onChange={(e)=>handleOrder(e)} className={styles.select}>
+                        <option value="Mode">Mode</option>
+                        <option value="Ascending">Ascending</option>
+                        <option value="Descending">Descending</option>
+                    </select>  
+               </div>
+             
+            </div>
+        </div>
     </div>)
 }

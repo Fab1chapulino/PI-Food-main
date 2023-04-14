@@ -1,0 +1,43 @@
+.Landing{
+    height:100vh;
+    width:100vw;
+    background-image:url(https://wallpaperaccess.com/full/1401021.jpg);
+    background-repeat:no-repeat;
+    background-size:cover;
+    object-fit:fill;
+    position:fixed;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+.h1{
+    font-family:'Times New Roman',Georgia , Times, serif;
+    color:#FFBA08;
+    font-size:5em;
+    text-shadow:-0.05em 0.05em 0em #03071E;
+}
+.link{
+    text-decoration:none;
+    background-color:#03071E;
+    color:#FAA307;
+    padding:2vh 1vw;
+    border-radius:1em;
+}
+.link:focus{
+    text-decoration:underline;
+}
+.link:visited{
+    color:#FFBA08;
+}
+.link:hover{
+    text-decoration:underline;
+}
+.link:active{
+    animation-name:goHome;
+    animation-duration:0.2s;
+}
+@keyframes goHome{
+    from {transform:scale(0.9, 0.9);}
+    to {transform:scale(1, 1)}
+}

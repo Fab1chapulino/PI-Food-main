@@ -9,6 +9,7 @@ const getRecipeById = async function (req, res){
         if(idRecipe.length<36){
         const {data}=await axios.get(`https://api.spoonacular.com/recipes/${idRecipe}/information?apiKey=${API_KEY}`);
         const detail = {
+            id:data.id,
             title:data.title,
             summary:data.summary,
             healthScore:data.healthScore,

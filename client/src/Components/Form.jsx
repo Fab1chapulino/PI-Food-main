@@ -4,6 +4,7 @@ import validate from "../validations";
 import {useDispatch, useSelector} from "react-redux";
 import {createRecipeThunk} from "../redux/thunkFunctions";
 import {useHistory} from 'react-router-dom';
+import styles from "../css/Create.module.css";
 
 export default function Form(){
     //hooks
@@ -91,9 +92,9 @@ export default function Form(){
 
 
 //Doing the user to know what instructions have been added so far
-      function createStep(){
-        step.length &&
-        setInput({
+      function createStep(e){
+        if(step.length){
+             setInput({
             ...input,
             steps:[...input.steps,step]
         })
@@ -102,6 +103,8 @@ export default function Form(){
             ...errors,
             steps:""
         })
+        }
+       
         //console.log(input)
     }  
 
@@ -130,6 +133,13 @@ export default function Form(){
                 ...input,
                 steps:[...newSteps]
             })
+            setErrors({
+                ...errors,
+                steps:validate({
+                    steps:input.steps
+                })["steps"]
+            })
+            console.log(input.steps)
         }
     /*------------------------------------------useEffects----------------------------------------------*/
 
@@ -166,47 +176,56 @@ export default function Form(){
     /*---------------------Rendering------------- */
     return (
         <div>
-            <h1>Create a Recipe</h1>
-
-            <form onSubmit={(e)=>handleSubmit(e)}>
+            <h1 className={styles.create}>Create a Recipe</h1>
+            <div className={styles.form}>
+            <form onSubmit={(e)=>handleSubmit(e)} >
 
         {/*  name */}
-
-                <label for="title">Name</label>
-                <input name="title" id="title" value={input.title} onChange={ e => handleInputChange(e)}/>
-                <p>{errors.title && errors.title}</p>
+                <div >
+                    <label for="title" className={styles.label}>Name</label><br/>
+                    <input name="title" id="title" value={input.title} onChange={ e => handleInputChange(e)}  className={errors.title?styles.errorInput:styles.input}/>
+                    <p className={errors.title && styles.error}>{errors.title && errors.title}</p>
+                </div>
+                
 
        {/*  Summary */}
-
-                <label for="summary">Summary</label>
-                <textarea name="summary" id="summary" value={input.summary} onChange={ e => handleInputChange(e)}/>
-                <p>{errors.summary && errors.summary}</p>
+                <div>
+                    <label for="summary" className={styles.label}>Summary</label> <br/>
+                    <textarea name="summary" id="summary" value={input.summary} onChange={ e => handleInputChange(e)}  className={errors.title?styles.errorInput:styles.input}/>
+                    <p className={errors.summary && styles.error}>{errors.summary && errors.summary}</p>
+                </div>
+                
         {/* Steps */}
 
-                <label for="steps">Instructions</label>
-                <input name="steps"  value={step} id="steps" onChange={ e => handleInputChange(e)}/>
-                <label   onClick={()=>createStep()}  >Add</label>
-                <p>{errors.steps && errors.steps}</p>
-                <ol>
-                    { input.steps && input.steps.map( (inst, i) =>{
-                        return <li key={i} >
-                            <span>{inst}</span>
-                            <input id={i} onChange={(e)=> editStep(e)} value={input.steps[i]}/>               
-                            <label id={i} onClick={(e) => deleteStep(e)}>X</label>
+                <div>
+                    <label for="steps" className={styles.label}>Instructions</label><br/>
+                    <input name="steps"  value={step} id="steps" onChange={ e => handleInputChange(e)}  className={errors.title?styles.errorInput:styles.input}/>
+                    <span   onClick={(e)=>createStep(e)}  className={styles.addButton}>Add</span>
+                    <p className={errors.steps && styles.error}>{errors.steps && errors.steps}</p>
+                    <ol>
+                        { input.steps && input.steps.map( (inst, i) =>{
+                            return <li key={i} >
+                                <span>{inst}</span><br/>
+                                <input id={i} onChange={(e)=> editStep(e)} value={input.steps[i]}/>               
+                                <label id={i} onClick={(e) => deleteStep(e)} className={styles.deleteButton}>X</label>
 
-                            </li>
-                    })}
-                </ol>
+                                </li>
+                        })}
+                    </ol>
+                </div>
+                
 
       {/*   healthScore */}
-
-                <label for="healthScore">HealthScore</label>
-                <input value={input.healthScore} name="healthScore" id="healthScore" type="range" min="0" step="1" max="100" onChange={(e)=>handleInputChange(e)}/>
-                <span>{input.healthScore && input.healthScore}</span>
+                <div className={styles.block}>
+                    <label for="healthScore" className={styles.label}>HealthScore</label>
+                    <input value={input.healthScore} name="healthScore" id="healthScore" type="range" min="0" step="1" max="100" onChange={(e)=>handleInputChange(e)}/>
+                    <span>{input.healthScore && input.healthScore}</span>
+                </div>
+          
 
         {/* diets */}
-
-                <p>Diets</p>
+                <div className={styles.block}>
+                     <label className={styles.label}>Diets</label>
                       {diets.length &&
                         diets.map((diet, index)=>{
                             return <div key={index} >
@@ -215,15 +234,21 @@ export default function Form(){
                                 </div>
                         })
                     } 
+                </div>
+               
 
         {/* image */}
             
-                <label for="image">Image</label>
-                <input name="image" id="image" value={input.image} onChange={ e => handleInputChange(e)}/>
-                <p>{errors.image && errors.image}</p>
+            <div className={styles.block}>
+                <label for="image" className={styles.label}>Image</label><br/>
+                <input name="image" id="image" value={input.image} onChange={ e => handleInputChange(e)} className={errors.image?styles.errorInput:styles.input}/>
+                <p className={errors.image && styles.error}>{errors.image && errors.image}</p>
+            </div>
+              
+            <button type="submit" className={styles.addButton}>Submit</button>
 
-            <button type="submit">Submit</button>
             </form>
+            </div>
             
         </div>
     )

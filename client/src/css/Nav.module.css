@@ -1,0 +1,27 @@
+.Nav{
+    background-color:#03071E;
+    display:flex;
+    flex-direction:row;
+    width:100vw;
+    position:fixed;
+    z-index:2;
+}
+.link{
+    text-decoration:none;
+    color:#FFBA08;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    padding:2vh 1vw;
+    border-right:solid 1px #FFBA08;
+}
+.link:focus{
+    text-decoration:underline;
+}
+.link:visited{
+    color:#FFBA08;
+}
+.link:hover{
+    text-decoration:underline;
+}
+.link:active{
+    background-color:#370617;
+}

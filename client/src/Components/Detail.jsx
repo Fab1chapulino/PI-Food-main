@@ -8,24 +8,32 @@ export default function Detail(){
     const {id} = useParams();
     const history = useHistory();
     const [ detail, setDetail ] = useState({});
+    const [message, setMessage]=useState("");
 
     useEffect(()=>{
         ( async function getDetail(){
-      const {data} = await axios.get(`http://localhost:3001/recipes/${id}`)
-        
-      const regex = /(<([^>]+)>)/ig;
-      data.summary=data.summary.replace(regex, "");
-      console.log(typeof data.id, data.id)
+            try{
+            const {data} = await axios.get(`http://localhost:3001/recipes/${id}`)
+            
+        const regex = /(<([^>]+)>)/ig;
+        data.summary=data.summary.replace(regex, "");
+        console.log(typeof data.id, data.id)
 
-    /*     data.diets=typeof data.id ==="number"
-        ? data.diets.join(", ") 
-        : data.diets.map( diet => diet.name).join(", "); */
+            data.diets=id.length <36
+            ? data.diets.join(", ") 
+            : data.diets.map( diet => diet.name).join(", ");
 
-        setDetail({...data})
+            setDetail({...data})
+            }catch(err){
+                setMessage("Cannot Fetch Recipe")
+                console.log(err.message)
+            }
+      
   })()
     },[])
 
     return(
+        !message.length?
         <div >
             <div>
             <button onClick={()=> history.goBack()} className={styles.goBack}>Go back</button>
@@ -45,19 +53,15 @@ export default function Detail(){
                 }) : null}
                 </ol>
                 <h2 className={styles.Title}>Diets</h2>
-                   {/* <p>{detail.diets}</p> */} 
-                  <ul>
-                    {
-                    typeof detail.id==="number" && detail.diets.length
-                    ?detail.diets.map((diet, i)=> {
-                        return <li key={i}>{diet}</li>
-                    }): detail.diets.length && detail.diets.map((diet, i)=> {
-                        return <li key={i}>{diet.name}</li>
-                    })
-                }
-            </ul>
+                    <p>{detail.diets}</p> 
             </div> 
              
+        </div>
+        :<div>
+              <div>
+            <button onClick={()=> history.goBack()} className={styles.goBack}>Go back</button>
+            </div>
+            <h1 className={styles.errorMessage}>Coudn`t fetch recipe.<br/> Please check your internet connection.</h1>
         </div>
     )
 }

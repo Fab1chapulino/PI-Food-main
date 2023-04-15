@@ -2,7 +2,7 @@ const initialState = {
     allRecipes: [],
     allRecipesCopy: [],
     searchRecipes:[],
-    message:"",
+    message:""
 };
 
 export default function rootReducer( state=initialState, {type, payload} ){

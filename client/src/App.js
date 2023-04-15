@@ -9,12 +9,18 @@ import {
   Loading
 } from "./Components/index.js";
 import { useSelector } from "react-redux";
-import { Switch, Route, useLocation} from 'react-router-dom';
+import {useState, useEffect} from "react";
+import { Switch, Route, useLocation, useParams} from 'react-router-dom';
 
 function App() {
   //hooks
   const location = useLocation();
   const allRecipes = useSelector(data=>data.allRecipes);
+  const message = useSelector(data=>data.message);
+  const {id}=useParams();
+
+
+
   return (
     <div>
       {location.pathname!=="/"?<Nav/>:null}
@@ -25,7 +31,7 @@ function App() {
         </Route>
 
          <Route path="/home/:page">    
-         <Home/>
+              {allRecipes.length || message==="Fetch failed"?<Home/>:<Loading/>}
         </Route>
 
         <Route path="/form">
@@ -35,10 +41,6 @@ function App() {
         <Route path="/detail/:id">
           <Detail/>
         </Route>
-
-       {/*  <Route path="/search">
-          <Search/>
-        </Route> */}
         
       </Switch>
     </div>

@@ -168,7 +168,7 @@ export default function Form(){
                 setErrors(validate(input))
             }else if(message==="POSTED RECIPE SUCCESFULLY"){
                 history.push("/home/1")
-                window.location.reload() 
+                window.location.reload()
             }
     },[message])
 

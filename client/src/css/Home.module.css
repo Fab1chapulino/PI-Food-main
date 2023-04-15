@@ -64,3 +64,8 @@
     border-radius:2em;
     border:solid yellow;
 }
+.errorMessage{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-align:center;
+    color:#DC2F02;
+}

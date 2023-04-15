@@ -15,6 +15,7 @@ export default function Search(){
     const history = useHistory();
     const location = useLocation();
     const search = useSelector( state => state.searchRecipes)
+    const message = useSelector(data=>data.message)
     const dispatch = useDispatch();    
     
     //Some functions
@@ -62,8 +63,14 @@ export default function Search(){
                 <span onClick={(e)=>onSearch(e)} className={styles.searchButton}>search</span>
             </div>
             {
-            location.pathname==="/search" && recipes.length
-            ?<div><span onClick={()=>history.go(-pages)} className={styles.goBack}>Go Back</span><Cards nineRecipes={recipes} /></div>
+            location.pathname==="/search"//message !== "Coudn`t find results for this recipe"
+            ? recipes.length || message !== "Coudn`t find results for this recipe"
+                
+                ?<div><span onClick={()=>history.go(-pages)} className={styles.goBack}>Go Back</span>
+                <Cards nineRecipes={recipes} /></div>
+
+                :<div><span onClick={()=>history.go(-pages)} className={styles.goBack}>Go Back</span>
+                <h1 className={styles.errorMessage}>Coudn`t find results for this recipe.</h1></div>
             :null
             }
         </div>

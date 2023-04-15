@@ -1,7 +1,9 @@
 import { useSelector } from "react-redux";
 import { NavLink, useParams,useHistory } from "react-router-dom";
+import {useState, useEffect} from "react";
 import Cards from "./Cards";
 import Options from "./Options.jsx";
+import Loading from "../Loading.jsx";
 import styles from "../../css/Home.module.css";
 
 export default function Home(){
@@ -9,8 +11,10 @@ export default function Home(){
     let { page } = useParams();
     page = parseInt(page);
     const history = useHistory();
+    const [loading, setLoading]=useState(true);
     //Gettin nine recipes
     const allRecipes = useSelector(data=>data.allRecipes);
+    const message = useSelector(data=> data.message);
     //console.log(allRecipes);
     const nineRecipes = allRecipes.slice((page-1)*9, page*9)
     //Setting pages
@@ -28,10 +32,19 @@ export default function Home(){
         if(page !==pages[pages.length-1] ) history.push(`/home/${page+1}`)
     }
 
+    useEffect(()=>{
+        setLoading(true)
+        setTimeout(()=>{
+            setLoading(false)
+        },1000)
+    },[])
+
     //rendering
     return (
+    message !== "Fetch failed" ?
+    !loading?
         <div>
-            <Options/>
+             <Options/>
             <div className={styles.Pages}>
                 <span onClick={goLeft} className={styles.button}>{left}</span>
                 {pages.map( page => {
@@ -47,15 +60,18 @@ export default function Home(){
             </div>
 
             <div className={styles.Pages}>
-            <span onClick={goLeft} className={styles.button}>{left}</span>
-                {pages.map( page => {
-                     return (<span key={page}>
-                        <NavLink to={`/home/${page}`} className={styles.button}
-                        >{page}</NavLink>
-                        </span>)
-                })}
-            <span onClick={goRight} className={styles.button}>{right}</span>
+                <span onClick={goLeft} className={styles.button}>{left}</span>
+                    {pages.map( page => {
+                        return (<span key={page}>
+                            <NavLink to={`/home/${page}`} className={styles.button}
+                            >{page}</NavLink>
+                            </span>)
+                    })}
+                <span onClick={goRight} className={styles.button}>{right}</span>
             </div>
+        </div>
+        :<Loading/>
+        : <div><h1 className={styles.errorMessage}>Oops! :O, there must be an error.<br/> Please check your internet connection<br/> and then refresh the page.</h1>
         </div>
     )
 }

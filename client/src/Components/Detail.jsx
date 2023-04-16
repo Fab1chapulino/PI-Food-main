@@ -1,4 +1,4 @@
-import {useParams, NavLink, useHistory} from "react-router-dom";
+import {useParams, useHistory} from "react-router-dom";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import styles from "../css/Detail.module.css";

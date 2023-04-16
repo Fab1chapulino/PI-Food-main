@@ -1,5 +1,5 @@
 .Pages{
-    width: 100vw;
+    max-width: 100vw;
     display:flex;
     justify-content:center;
 }
@@ -28,6 +28,7 @@
 }
 .divCard{
     max-width:25vw;
+    height:auto;
     margin:0;
     padding:0;
 }
@@ -54,10 +55,6 @@
 .Card:hover{
   transform:scale(1.1,1.1)
 }
-@keyframes Card{
-    from {transform:scale(1, 1)}
-    to {transform:scale(1.1, 1.1)}
-}
 .cardImage{
     max-width:100%;
     min-height:50%;
@@ -68,4 +65,39 @@
     font-family: Georgia, 'Times New Roman', Times, serif;
     text-align:center;
     color:#DC2F02;
+}
+@media screen and (max-width:1000px){
+    .divCard{
+        max-width:33vw;
+        margin:0;
+        padding:0;
+    }
+}
+@media screen and (max-width:830px){
+    .divCard{
+        max-width:40vw;
+        margin:0;
+        padding:0;
+    }
+}
+@media screen and (max-width:600px){
+    .divCard{
+        max-width:55vw;
+        margin:0 20vw;
+        padding:0;
+    }
+}
+@media screen and (max-width:500px){
+    .divCard{
+        max-width:65vw;
+        margin:0;
+        padding:0;
+    }
+}
+@media screen and (max-width:430px){
+    .divCard{
+        max-width:76vw;
+        margin:0;
+        padding:0;
+    }
 }

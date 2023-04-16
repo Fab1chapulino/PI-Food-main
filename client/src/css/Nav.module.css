@@ -18,6 +18,7 @@
 }
 .link:visited{
     color:#FFBA08;
+    background-color:#370617;
 }
 .link:hover{
     text-decoration:underline;

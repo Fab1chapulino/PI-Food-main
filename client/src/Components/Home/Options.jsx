@@ -93,35 +93,40 @@ export default function Options(){
         {/* Filters */}
         <div>
         <h3>Filters</h3>
-            <div >
-                <div className={styles.filtersOrders}>
-                     
-                    <label id="diets" onClick={(e)=>showOptions(e)} className={styles.label}>By diets</label>
+          <div className={styles.filters}>
+             <div className={styles.allSelects}>
+                    <div className={styles.filtersOrders}>
+                        
+                        <label id="diets" onClick={(e)=>showOptions(e)} className={styles.label}>By diets</label>
 
-                </div>  
-                
-                <div className={styles.filtersOrders}>
-                    <select name="origin" onChange={(e)=>handleFilters(e)} className={styles.select}>
-                    <option value="Show All">Show All</option>
-                    <option value="Created">Created</option>
-                    <option value="Not Created">Not Created</option>
-                    </select>
-                </div>
-                {show.diets && diets.map( (diet, i) => {
-                        return <div key={i} >
+                    </div>  
+                    
+                    <div className={styles.filtersOrders}>
+                        <select name="origin" onChange={(e)=>handleFilters(e)} className={styles.select}>
+                        <option value="Show All">Show All</option>
+                        <option value="Created">Created</option>
+                        <option value="Not Created">Not Created</option>
+                        </select>
+                    </div>
+              </div>
+                <div>
+                    {show.diets && diets.map( (diet, i) => {
+                        return <div key={i}>
                             <input type="checkbox" name="diets" id={diet} value={diet} onChange={(e)=> handleFilters(e)}/>
                             <label for={diet}>{diet}</label>
                         </div>
                     })}
-            
-            </div>
+                </div>
+          </div>
+          
+
         </div>
        
 
             {/* Orders */}
         <div>
         <h3>Order By</h3>
-            <div>
+            <div className={styles.allSelects}>
                 <div className={styles.filtersOrders}>
                     <select name="by" onChange={(e)=>handleOrder(e)} className={styles.select}>
                         <option value="By">By</option>

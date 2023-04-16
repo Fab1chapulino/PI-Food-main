@@ -59,7 +59,7 @@ export default function Search(){
     return (
         <div>
             <div className={styles.Search}>
-                <input type="search" size="70" onChange={(e)=> handleInputChange(e)} value={query} className={styles.input} onKeyDown={(e)=>onSearch(e)} />
+                <input type="search" onChange={(e)=> handleInputChange(e)} value={query} className={styles.input} onKeyDown={(e)=>onSearch(e)} />
                 <span onClick={(e)=>onSearch(e)} className={styles.searchButton}>search</span>
             </div>
             {

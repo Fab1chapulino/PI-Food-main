@@ -38,3 +38,17 @@
     text-align:center;
     color:#DC2F02;
 }
+@media screen and (max-width:795px){
+    .image{
+        border-radius:2em;
+        border:solid #03071E;
+        max-width:90vw;
+    }
+    .Data{
+        padding:1vh 1vw;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        display:flex;
+        flex-direction:column;
+        align-items:flex-start;
+    }
+}

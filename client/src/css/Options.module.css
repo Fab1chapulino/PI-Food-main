@@ -5,8 +5,16 @@
     margin-bottom: 5vh;
 }
 .filtersOrders{
-    display:inline-block;
     margin:0em 1em;
+}
+.allSelects{
+    display:flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+}
+.filters{
+    display:flex;
+    flex-direction:column;
 }
 .label{
         background-color:#FAA307;
@@ -27,8 +35,18 @@
     border:solid 1px #03071E;
 }
 .select:active{
-    border:solid white;
+    border:solid 1px white;
 }
 .checkbox{
     visibility:hidden;
+}
+@media screen and (max-width:540px){
+    .allSelects{
+        display:flex;
+        flex-direction:column-reverse;
+        flex-wrap:wrap;
+    }
+    .filtersOrders{
+        margin:1em 0em;
+    }
 }

@@ -9,15 +9,13 @@ import {
   Loading
 } from "./Components/index.js";
 import { useSelector } from "react-redux";
-import {useState, useEffect} from "react";
-import { Switch, Route, useLocation, useParams} from 'react-router-dom';
+import { Switch, Route, useLocation} from 'react-router-dom';
 
 function App() {
   //hooks
   const location = useLocation();
   const allRecipes = useSelector(data=>data.allRecipes);
   const message = useSelector(data=>data.message);
-  const {id}=useParams();
 
 
 

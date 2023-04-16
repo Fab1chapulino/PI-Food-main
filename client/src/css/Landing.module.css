@@ -16,6 +16,7 @@
     color:#FFBA08;
     font-size:5em;
     text-shadow:-0.05em 0.05em 0em #03071E;
+    text-align:center;
 }
 .link{
     text-decoration:none;
@@ -40,4 +41,13 @@
 @keyframes goHome{
     from {transform:scale(0.9, 0.9);}
     to {transform:scale(1, 1)}
+}
+@media screen and (max-width:320px){
+    .h1{
+        font-family:'Times New Roman',Georgia , Times, serif;
+        color:#FFBA08;
+        font-size:4em;
+        text-shadow:-0.05em 0.05em 0em #03071E;
+        text-align:center;
+    }
 }

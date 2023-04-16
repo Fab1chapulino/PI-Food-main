@@ -9,11 +9,15 @@
     justify-content:center;
     align-items:center;
     border-bottom:solid #03071E;
+    margin:0;
+    padding:0;
 }
 .input{
     font-family:Georgia, 'Times New Roman', Times, serif;
     border-radius:1em;
     border:solid #FAA307;
+    min-width:45vw;
+    margin:4vh 0;
 }
 .input:focus{
     border:solid #FAA307;
@@ -57,12 +61,36 @@
     animation-name:goBack;
     animation-duration:0.2s;
 }
-@keyframes goBack{
-    from {transform:scale(0.99, 0.99);}
-    to {transform:scale(1, 1)}
-}
 .errorMessage{
     font-family: Georgia, 'Times New Roman', Times, serif;
     text-align:center;
     color:#DC2F02;
+}
+@keyframes goBack{
+    from {transform:scale(0.99, 0.99);}
+    to {transform:scale(1, 1)}
+}
+@media screen and (max-width:900px){
+    .Search{
+        background-image:url(https://i1.wp.com/www.horecacentrum.nl/wp-content/uploads/2018/03/food-collage.jpg?ssl=1);
+        background-repeat:no-repeat;
+        background-size:cover;
+        max-width:100vw;
+        height:47vh;
+        object-fit:cover;
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+        border-bottom:solid #03071E;
+        margin:0;
+        padding:0;
+    }
+    .input{
+        font-family:Georgia, 'Times New Roman', Times, serif;
+        border-radius:1em;
+        border:solid #FAA307;
+        min-width:85vw;
+        margin:4vh 0;
+    }
 }

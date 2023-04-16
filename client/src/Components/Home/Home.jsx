@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { NavLink, useParams,useHistory,useLocation } from "react-router-dom";
+import { NavLink, useParams,useHistory} from "react-router-dom";
 import {useState, useEffect} from "react";
 import Cards from "./Cards";
 import Options from "./Options.jsx";
@@ -8,7 +8,6 @@ import styles from "../../css/Home.module.css";
 
 export default function Home(){
     //hooks
-    const location = useLocation();
     let { page } = useParams();
     page = parseInt(page);
     const history = useHistory();

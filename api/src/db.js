@@ -12,7 +12,7 @@ const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}
   dialectOptions: {
         statement_timeout: 3600000 // 30 seconds
   },
-  port:5432,
+  port:7799,
   dialect:"postgres"
 });
 (async function test(){

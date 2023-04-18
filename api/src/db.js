@@ -15,6 +15,15 @@ const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}
   port:5432,
   dialect:"postgres"
 });
+(async function test(){
+  try {
+  await sequelize.authenticate();
+  console.log('Connection has been established successfully.');
+} catch (error) {
+  console.error('Unable to connect to the database:', error);
+}
+})()
+
 const basename = path.basename(__filename);
 
 const modelDefiners = [];

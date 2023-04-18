@@ -11,7 +11,7 @@ import {
 import { useSelector } from "react-redux";
 import { Switch, Route, useLocation} from 'react-router-dom';
 import axios from "axios";
-axios.defaults.baseURL = "http://localhost:3001";
+axios.defaults.baseURL = "https://pi-food-main-production-5b4b.up.railway.app/";
 
 function App() {
   //hooks
